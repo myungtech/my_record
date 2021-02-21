@@ -48,6 +48,17 @@ class App extends Component {
 
   };
 
+  handleAdd = (name) => {
+    const habits = [...this.state.habits, { id: Date.now(), name: name, count: 0 }]
+    this.setState({ habits });
+  };
+  handleReset = () => {
+    const habits = this.state.habits.map(habit => {
+      habit.count = 0;
+      return habit;
+    });
+    this.setState({ habits });
+  };
 
   // 자식요소는 여러가지를 return 하면 안된다.
   // 부모요소가 하나만 있어야한다.
@@ -60,6 +71,8 @@ class App extends Component {
           onIncrement={this.handleIncrement}
           onDecrement={this.handleDecrement}
           onDelete={this.handleDelete}
+          onAdd={this.handleAdd}
+          onReset={this.handleReset}
         />
       </>
     );

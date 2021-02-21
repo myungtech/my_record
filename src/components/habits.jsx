@@ -28,13 +28,16 @@ class Habits extends Component {
     handleDelete = (habit) => {
         this.props.onDelete(habit);
     };
+    handleAdd = (name) => {
+        this.props.onAdd(name);
+    };
 
     //배열들을 빙글빙글 돌면서 각각의 state안의 습관들을 habit컴포넌트에 연결해줌
     //Habits 컴폰넌트는 총 state상의 개수(3개)만큼의 habit컴포넌트를 가지게됨
     render() {
         return (
             <>
-                <HabitAddForm />
+                <HabitAddForm onAdd={this.handleAdd} />
                 <ul>
                     {
                         this.props.habits.map(habit => (
@@ -44,11 +47,13 @@ class Habits extends Component {
                                 onIncrement={this.handleIncrement}
                                 onDecrement={this.handleDecrement}
                                 onDelete={this.handleDelete}
+
                             />
                         ))
                     }
 
                 </ul>
+                <button className="habits-reset" onClick={this.props.onReset}>Reset All</button>
             </>
         );
     }
